@@ -9,3 +9,4 @@ services:
       - ./passwordfile:/opt/standupbot/passwordfile
       - ./config.json:/opt/standupbot/config.json
       - ./standupbot.db:/opt/standupbot/standupbot.db
+      - ./current-flows.json:/opt/standupbot/current-flows.json

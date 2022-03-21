@@ -11,7 +11,6 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/kyoh86/xdg"
 	_ "github.com/mattn/go-sqlite3"
 	log "github.com/sirupsen/logrus"
 	"maunium.net/go/mautrix"
@@ -37,6 +36,7 @@ func main() {
 	logLevelStr := flag.String("loglevel", "debug", "the log level")
 	logFilename := flag.String("logfile", "", "the log file to use (defaults to '' meaning no log file)")
 	dbPath := flag.String("db", "./standupbot.db", "database file location")
+	flowPath := flag.String("flow", "./current-flows.json", "current flows file location")
 	flag.Parse()
 
 	// Configure logging
@@ -76,7 +76,7 @@ func main() {
 		log.Fatal("Could not open standupbot database.")
 	}
 
-	currentStandupFlowsJson, err := os.ReadFile(xdg.DataHome() + "/standupbot/current-flows.json")
+	currentStandupFlowsJson, err := os.ReadFile(*flowPath)
 	if err != nil {
 		log.Warn("Couldn't open the current-flows JSON.")
 	} else {
@@ -107,7 +107,7 @@ func main() {
 			if err != nil {
 				log.Error("Failed to serialize current standup flows!")
 			} else {
-				currentStandupFlowsFile, err := os.OpenFile(xdg.DataHome()+"/standupbot/current-flows.json", os.O_CREATE|os.O_WRONLY, 0600)
+				currentStandupFlowsFile, err := os.OpenFile(*flowPath, os.O_CREATE|os.O_WRONLY, 0600)
 				if err != nil {
 					log.Error("Failed to open current standup flows JSON file!")
 				} else {
