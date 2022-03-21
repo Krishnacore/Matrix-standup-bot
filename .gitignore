@@ -5,4 +5,4 @@ config*.json
 standupbot
 passwordfile
 .envrc.user
-standupbot.db
+standupbot.db*
