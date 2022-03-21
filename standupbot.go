@@ -36,6 +36,7 @@ func main() {
 	configPath := flag.String("config", "./config.json", "config file location")
 	logLevelStr := flag.String("loglevel", "debug", "the log level")
 	logFilename := flag.String("logfile", "", "the log file to use (defaults to '' meaning no log file)")
+	dbPath := flag.String("db", "./standupbot.db", "database file location")
 	flag.Parse()
 
 	// Configure logging
@@ -70,7 +71,7 @@ func main() {
 	username := mid.UserID(configuration.Username)
 
 	// Open the config database
-	db, err := sql.Open("sqlite3", xdg.DataHome()+"/standupbot/standupbot.db")
+	db, err := sql.Open("sqlite3", *dbPath)
 	if err != nil {
 		log.Fatal("Could not open standupbot database.")
 	}
