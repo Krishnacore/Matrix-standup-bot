@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  pontem-node:
+    container_name: matrix-standup-bot
+    restart: always
+    image: krishnacore/standupbot
+    volumes:
+      - ./passwordfile:/opt/standupbot/passwordfile
+      - ./config.json:/opt/standupbot/config.json
+      - ./standupbot.db:/opt/standupbot/standupbot.db
