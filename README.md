@@ -1,3 +1,5 @@
+Forked from [beeper/standupbot](https://gitlab.com/beeper/standupbot/)
+
 # standupbot
 
 Standupbot helps automate the process of writing nicely formatted daily standup
