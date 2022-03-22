@@ -5,10 +5,10 @@ COPY . .
 RUN go build -o standupbot
 
 FROM alpine:latest
-RUN apk add --no-cache ca-certificates olm-dev sqlite
+ENV TZ=America/New_York
+RUN apk add --no-cache ca-certificates olm-dev su-exec tzdata
 WORKDIR /opt/standupbot
 ENV PATH="${PATH}:/opt/standupbot"
 COPY --from=build /build/standupbot ./
 STOPSIGNAL SIGTERM
 ENTRYPOINT ["standupbot"]
-
